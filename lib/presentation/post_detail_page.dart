@@ -88,7 +88,7 @@ class _PostDetailPageState extends State<PostDetailPage> {
                     prefixIcon: const Icon(Icons.message),
                     hintText: 'Comment',
                     validatorMessage: 'Comment cannot be empty',
-                  )
+                  ),
                 ],
               ),
             ),
@@ -105,7 +105,7 @@ class _PostDetailPageState extends State<PostDetailPage> {
                 Navigator.of(context).pop();
                 _clearText();
               },
-            )
+            ),
           ],
         );
       },

@@ -36,7 +36,7 @@ class AlbumDetailPage extends StatelessWidget {
                   const SizedBox(
                     height: 8,
                   ),
-                  Text(album.photos[index].title)
+                  Text(album.photos[index].title),
                 ],
               ),
             );

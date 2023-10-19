@@ -33,7 +33,7 @@ class CommentCard extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Text(comment),
-          )
+          ),
         ],
       ),
     );
