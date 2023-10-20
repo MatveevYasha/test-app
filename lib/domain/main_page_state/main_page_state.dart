@@ -33,8 +33,9 @@ class MainPageState extends _$MainPageState {
 @freezed
 class MainPageStateData with _$MainPageStateData {
   const factory MainPageStateData({
-    required List<UserModel>? users,
+    required List<UserModel> users,
     @Default(false) bool hasLoadingError,
+    // TODO: добавить сообщение об ошибке
     @Default(true) bool isLoading,
   }) = _MainPageStateData;
 }

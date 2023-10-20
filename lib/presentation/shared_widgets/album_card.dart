@@ -11,7 +11,8 @@ class AlbumCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final mq = MediaQuery.of(context).size.width;
+    final mq = MediaQuery.sizeOf(context).width;
+    // TODO: Другим виджетом попробовать заскейлить
     final thumbSize = (mq - (16 * 2)) / 3;
     return Row(
       children: [

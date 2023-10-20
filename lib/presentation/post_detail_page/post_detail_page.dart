@@ -1,14 +1,15 @@
-import 'package:eds_test/data/models/comment_model.dart';
 import 'package:eds_test/data/models/post_model.dart';
 import 'package:eds_test/data/services/api_service.dart';
+import 'package:eds_test/domain/post_detail_page_state/post_detail_page_state.dart';
 import 'package:eds_test/presentation/shared_widgets/comment_card.dart';
 import 'package:eds_test/presentation/shared_widgets/custom_text_field.dart';
 import 'package:eds_test/presentation/shared_widgets/loader.dart';
-import 'package:eds_test/presentation/theme/app_colors.dart';
-import 'package:eds_test/presentation/theme/app_text_styles.dart';
+import 'package:eds_test/utils/theme/app_colors.dart';
+import 'package:eds_test/utils/theme/app_text_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class PostDetailPage extends StatefulWidget {
+class PostDetailPage extends ConsumerStatefulWidget {
   final PostModel post;
 
   const PostDetailPage({
@@ -17,27 +18,13 @@ class PostDetailPage extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _PostDetailPageState createState() => _PostDetailPageState();
+  _PostDetailPageConsumerState createState() => _PostDetailPageConsumerState();
 }
 
-class _PostDetailPageState extends State<PostDetailPage> {
-  List<CommentModel> comments = List.empty();
-  bool _isLoading = true;
+class _PostDetailPageConsumerState extends ConsumerState<PostDetailPage> {
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController commentController = TextEditingController();
-
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      comments = await ApiService.getCommentsByPostId(widget.post.id);
-      setState(() {
-        _isLoading = false;
-        comments = comments;
-      });
-    });
-  }
 
   void _clearText() {
     nameController.clear();
@@ -114,6 +101,20 @@ class _PostDetailPageState extends State<PostDetailPage> {
 
   @override
   Widget build(BuildContext context) {
+    final state = ref.watch(postDetailPageStateProvider(widget.post.id));
+
+    if (state.isLoading) {
+      return const Loader();
+    }
+
+    if (state.hasLoadingError) {
+      return const Material(
+        child: Center(
+          child: Text('Произошла ошибка, перезагрузите страницу!'),
+        ),
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.post.title),
@@ -121,51 +122,58 @@ class _PostDetailPageState extends State<PostDetailPage> {
         titleTextStyle: AppTextStyles.title,
         backgroundColor: AppColors.gray,
       ),
-      body: _isLoading
-          ? const Loader()
-          : ListView(
-              padding: const EdgeInsets.all(16),
-              children: [
-                Text(
-                  widget.post.title,
-                  style: AppTextStyles.title.copyWith(
-                    color: Colors.black,
-                  ),
-                  textAlign: TextAlign.start,
+      body: ListView(
+        padding: const EdgeInsets.all(16),
+        children: [
+          Column(
+            children: [
+              Text(
+                widget.post.title,
+                style: AppTextStyles.title.copyWith(
+                  color: Colors.black,
                 ),
-                const SizedBox(height: 7),
-                Text(
-                  widget.post.body,
-                  style: AppTextStyles.bodyTextStyle.copyWith(
-                    color: Colors.black,
-                  ),
+                textAlign: TextAlign.start,
+              ),
+              const SizedBox(height: 8),
+              Text(
+                widget.post.body,
+                style: AppTextStyles.bodyTextStyle.copyWith(
+                  color: Colors.black,
                 ),
-                const SizedBox(
-                  height: 8,
+              ),
+              const SizedBox(
+                height: 8,
+              ),
+              Text(
+                'Comments:',
+                style: AppTextStyles.title.copyWith(
+                  color: Colors.black,
                 ),
-                const Text('Comments:'),
-                const SizedBox(
-                  height: 8,
-                ),
-                ListView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemBuilder: (context, index) {
-                    final comment = comments[index];
-                    return CommentCard(
-                      username: comment.name,
-                      comment: comment.body,
-                      email: comment.email,
-                    );
-                  },
-                  itemCount: comments.length,
-                ),
-              ],
-            ),
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 8,
+          ),
+          ListView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemBuilder: (context, index) {
+              final comment = state.comments[index];
+              return CommentCard(
+                username: comment.name,
+                comment: comment.body,
+                email: comment.email,
+              );
+            },
+            itemCount: state.comments.length,
+          ),
+        ],
+      ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: AppColors.gray,
         child: const Icon(
           Icons.add,
-          size: 20,
         ),
         onPressed: () => _displayDialog(context),
       ),

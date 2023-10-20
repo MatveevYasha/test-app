@@ -1,4 +1,4 @@
-import 'package:eds_test/presentation/theme/app_text_styles.dart';
+import 'package:eds_test/utils/theme/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
 class PhotoCard extends StatelessWidget {

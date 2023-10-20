@@ -16,8 +16,9 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$MainPageStateData {
-  List<UserModel>? get users => throw _privateConstructorUsedError;
-  bool get hasLoadingError => throw _privateConstructorUsedError;
+  List<UserModel> get users => throw _privateConstructorUsedError;
+  bool get hasLoadingError =>
+      throw _privateConstructorUsedError; // TODO: добавить сообщение об ошибке
   bool get isLoading => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -31,7 +32,7 @@ abstract class $MainPageStateDataCopyWith<$Res> {
           MainPageStateData value, $Res Function(MainPageStateData) then) =
       _$MainPageStateDataCopyWithImpl<$Res, MainPageStateData>;
   @useResult
-  $Res call({List<UserModel>? users, bool hasLoadingError, bool isLoading});
+  $Res call({List<UserModel> users, bool hasLoadingError, bool isLoading});
 }
 
 /// @nodoc
@@ -47,15 +48,15 @@ class _$MainPageStateDataCopyWithImpl<$Res, $Val extends MainPageStateData>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? users = freezed,
+    Object? users = null,
     Object? hasLoadingError = null,
     Object? isLoading = null,
   }) {
     return _then(_value.copyWith(
-      users: freezed == users
+      users: null == users
           ? _value.users
           : users // ignore: cast_nullable_to_non_nullable
-              as List<UserModel>?,
+              as List<UserModel>,
       hasLoadingError: null == hasLoadingError
           ? _value.hasLoadingError
           : hasLoadingError // ignore: cast_nullable_to_non_nullable
@@ -76,7 +77,7 @@ abstract class _$$MainPageStateDataImplCopyWith<$Res>
       __$$MainPageStateDataImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<UserModel>? users, bool hasLoadingError, bool isLoading});
+  $Res call({List<UserModel> users, bool hasLoadingError, bool isLoading});
 }
 
 /// @nodoc
@@ -90,15 +91,15 @@ class __$$MainPageStateDataImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? users = freezed,
+    Object? users = null,
     Object? hasLoadingError = null,
     Object? isLoading = null,
   }) {
     return _then(_$MainPageStateDataImpl(
-      users: freezed == users
+      users: null == users
           ? _value._users
           : users // ignore: cast_nullable_to_non_nullable
-              as List<UserModel>?,
+              as List<UserModel>,
       hasLoadingError: null == hasLoadingError
           ? _value.hasLoadingError
           : hasLoadingError // ignore: cast_nullable_to_non_nullable
@@ -115,24 +116,23 @@ class __$$MainPageStateDataImplCopyWithImpl<$Res>
 
 class _$MainPageStateDataImpl implements _MainPageStateData {
   const _$MainPageStateDataImpl(
-      {required final List<UserModel>? users,
+      {required final List<UserModel> users,
       this.hasLoadingError = false,
       this.isLoading = true})
       : _users = users;
 
-  final List<UserModel>? _users;
+  final List<UserModel> _users;
   @override
-  List<UserModel>? get users {
-    final value = _users;
-    if (value == null) return null;
+  List<UserModel> get users {
     if (_users is EqualUnmodifiableListView) return _users;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
+    return EqualUnmodifiableListView(_users);
   }
 
   @override
   @JsonKey()
   final bool hasLoadingError;
+// TODO: добавить сообщение об ошибке
   @override
   @JsonKey()
   final bool isLoading;
@@ -168,15 +168,15 @@ class _$MainPageStateDataImpl implements _MainPageStateData {
 
 abstract class _MainPageStateData implements MainPageStateData {
   const factory _MainPageStateData(
-      {required final List<UserModel>? users,
+      {required final List<UserModel> users,
       final bool hasLoadingError,
       final bool isLoading}) = _$MainPageStateDataImpl;
 
   @override
-  List<UserModel>? get users;
+  List<UserModel> get users;
   @override
   bool get hasLoadingError;
-  @override
+  @override // TODO: добавить сообщение об ошибке
   bool get isLoading;
   @override
   @JsonKey(ignore: true)

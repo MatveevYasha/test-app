@@ -6,7 +6,7 @@ part of 'main_page_state.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$mainPageStateHash() => r'f2f6dd83505da32190a81ec48327dff07a796d99';
+String _$mainPageStateHash() => r'6a5f2f1ecd5267537c30d5fa0643aca46b802533';
 
 /// See also [MainPageState].
 @ProviderFor(MainPageState)

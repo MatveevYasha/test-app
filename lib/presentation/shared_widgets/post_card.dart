@@ -1,6 +1,6 @@
 import 'package:eds_test/data/models/post_model.dart';
-import 'package:eds_test/presentation/theme/app_colors.dart';
-import 'package:eds_test/presentation/theme/app_text_styles.dart';
+import 'package:eds_test/utils/theme/app_colors.dart';
+import 'package:eds_test/utils/theme/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
 class PostCard extends StatelessWidget {
