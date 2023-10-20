@@ -24,6 +24,7 @@ class CommentCard extends StatelessWidget {
         ),
       ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ListTile(
             style: ListTileStyle.list,

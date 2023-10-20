@@ -25,7 +25,7 @@ class PostCard extends StatelessWidget {
             style: AppTextStyles.title,
             textAlign: TextAlign.start,
           ),
-          const SizedBox(height: 7),
+          const SizedBox(height: 8),
           Text(
             post.body,
             maxLines: 1,

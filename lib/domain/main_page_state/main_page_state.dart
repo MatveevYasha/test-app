@@ -35,7 +35,6 @@ class MainPageStateData with _$MainPageStateData {
   const factory MainPageStateData({
     required List<UserModel> users,
     @Default(false) bool hasLoadingError,
-    // TODO: добавить сообщение об ошибке
     @Default(true) bool isLoading,
   }) = _MainPageStateData;
 }

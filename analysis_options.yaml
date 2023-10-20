@@ -9,11 +9,9 @@ analyzer:
   language:
     strict-inference: true
     strict-raw-types: true
+    strict-casts: true
   plugins:
     - dart_code_metrics
-  strong-mode:
-    implicit-casts: false
-    implicit-dynamic: false
   errors:
     avoid_dynamic_calls: error
     avoid_empty_else: error
@@ -219,4 +217,4 @@ linter:
     # Pub rules.
     depend_on_referenced_packages: true
     secure_pubspec_urls: true
-    sort_pub_dependencies: true
+    sort_pub_dependencies: false

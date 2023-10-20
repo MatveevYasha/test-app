@@ -26,7 +26,6 @@ class AlbumsListWidget extends StatelessWidget {
         final album = albums[index];
         return GestureDetector(
           onTap: () {
-            // TODO: кэшировать картинки
             Navigator.push<void>(
               context,
               MaterialPageRoute(
